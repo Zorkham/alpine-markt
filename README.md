@@ -1,2 +1,2 @@
-# alpine-board-game-explorer
-An Alpine.js Board Game Explorer application
+# alpine-markt
+An Alpine.js Markt application
