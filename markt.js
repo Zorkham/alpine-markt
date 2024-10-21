@@ -3,26 +3,7 @@ document.addEventListener("alpine:init", () => {
     search: Alpine.$persist(""),
     sortByPrice: Alpine.$persist("none"),
     products: [],
-    cart: Alpine.$persist([
-      [
-        {
-          id: 101,
-          title: "Apple AirPods Max Silver",
-          price: 549.99,
-          thumbnail:
-            "https://cdn.dummyjson.com/products/images/mobile-accessories/Apple%20AirPods%20Max%20Silver/thumbnail.png",
-          quantity: 1,
-        },
-        {
-          id: 105,
-          title: "Apple MagSafe Battery Pack",
-          price: 99.99,
-          thumbnail:
-            "https://cdn.dummyjson.com/products/images/mobile-accessories/Apple%20MagSafe%20Battery%20Pack/thumbnail.png",
-          quantity: 1,
-        },
-      ],
-    ]),
+    cart: Alpine.$persist([[]]),
     cartOpen: Alpine.$persist(false),
 
     // Initialize app and fetch products
