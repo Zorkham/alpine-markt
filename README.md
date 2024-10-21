@@ -1,2 +1,2 @@
-# alpine-pokedex
-An Alpine.js Pokedex application
+# alpine-board-game-explorer
+An Alpine.js Board Game Explorer application
