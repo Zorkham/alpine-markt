@@ -22,21 +22,30 @@
 
     <header class="bg-white border">
         <div class="container mx-auto py-4 px-6">
-            <div class="flex justify-between items-center">
-                <h1 class="text-2xl font-bold text-gray-900">Markt</h1>
+            <div class="flex justify-between items-center space-x-12">
+                <h1 @click="currentTab = 'home'" class="text-2xl font-bold text-gray-900 cursor-pointer">Markt</h1>
+                <nav class="flex flex-1 space-x-6">
+                    <button @click="currentTab = 'home'"
+                        :class="currentTab === 'home' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'"
+                        class="py-2">
+                        Home
+                    </button>
+                    <button @click="currentTab = 'products'"
+                        :class="currentTab === 'products' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'"
+                        class="py-2">
+                        Products
+                    </button>
+                </nav>
                 <div class="flex space-x-6 items-center">
-
-                    <div class="relative w-full max-w-md">
+                    <div x-cloak x-show="currentTab === 'products'" class="relative w-full max-w-md">
                         <input type="text" placeholder="Search for products..." x-model="search" @input="search"
-                            class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-[250px]"
+                            class="hidden md:block p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-[250px]"
                             aria-describedby="search-help">
                         <button x-cloak x-show="search" @click="clearSearch"
                             class="absolute inset-y-0 right-0 flex items-center pr-2">
-                            <i class="ph ph-x text-gray-500 cursor-pointer hover:text-gray-700"
-                                title="Clear search"></i>
+                            <i class="ph ph-x text-gray-500 cursor-pointer hover:text-gray-700"></i>
                         </button>
                     </div>
-
                     <button @click="toggleCart" class="relative">
                         <i class="ph ph-shopping-cart text-2xl text-gray-800"></i>
                         <span x-cloak x-show="cart.length > 0"
@@ -49,65 +58,113 @@
         </div>
     </header>
 
-    <div class="container mx-auto py-6 px-6 flex justify-between">
-        <div>
-            <select x-model="sortByPrice"
-                class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <option value="none">Sort by Price</option>
-                <option value="asc">Price: Low to High</option>
-                <option value="desc">Price: High to Low</option>
-            </select>
-        </div>
-
-        <div x-cloak x-show="search || sortByPrice !== 'none'">
-            <button @click="clearFilters"
-                class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">Clear
-                Filters</button>
-        </div>
-    </div>
-
-    <div class="container mx-auto px-6 pb-12">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <template x-if="!filteredProducts.length">
-                <div class="col-span-full text-center mt-12 mx-auto w-[430px]">
-                    <h2 class="text-xl font-bold">No Results Found for "<span x-text="search"></span>"</h2>
-                    <p class="mt-2 text-gray-500">Sorry, we couldn't find any results that match your search query.
-                        Please try refining your search.</p>
-                </div>
-            </template>
-            <template x-for="product in filteredProducts" :key="product.id">
-                <div
-                    class="bg-white border border-[#E2E8F0] shadow-sm rounded-sm overflow-hidden hover:shadow-md transform hover:scale-105 transition-all duration-300 flex flex-col h-full justify-between">
-                    <div class="h-64 w-full bg-neutral-100 flex items-center justify-center">
-                        <img :src="product.thumbnail" alt="Product thumbnail" class="h-full object-contain">
-                    </div>
-                    <div class="p-4">
-                        <h2 class="font-semibold text-md text-gray-800" x-text="product.title"></h2>
-                        <p class="text-gray-600 text-sm mt-1">$<span x-text="product.price"></span></p>
-                    </div>
-                    <div class="p-4">
-                        <button @click="addToCart(product)"
-                            class="w-full bg-blue-600 text-white py-2 rounded-sm hover:bg-blue-700 transition-all">
-                            <i class="ph ph-plus text-white text-sm"></i> Add</button>
+    <main class="container mx-auto py-6 px-6">
+        <div x-show="currentTab === 'home'">
+            <section class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="col-span-2">
+                    <div
+                        class="bg-white border border-[#E2E8F0] shadow-sm rounded-sm overflow-hidden hover:shadow-md transform hover:scale-[1.02] transition-all duration-300 flex flex-col h-full justify-between">
+                        <div class="h-full bg-neutral-100 flex items-center justify-center">
+                            <img class="h-[460px] object-cover" src="airpods.png" alt="Product thumbnail">
+                        </div>
+                        <div class="p-4">
+                            <h2 class="text-2xl font-bold mb-2" x-text="products[1].title"></h2>
+                            <p class="text-gray-600 text-sm mt-1 mb-2">$<span x-text="products[1].price"></span></p>
+                            <p class="text-gray-600 mt-1 mb-4" x-text="products[1].description"></p>
+                        </div>
+                        <div class="p-4">
+                            <button @click="addToCart(products[1])"
+                                class="w-full bg-blue-600 text-white py-2 rounded-sm hover:bg-blue-700 transition-all">
+                                <i class="ph ph-plus text-white text-sm"></i> Add</button>
+                        </div>
                     </div>
                 </div>
-            </template>
+                <div class="col-span-2 grid grid-cols-2 gap-6">
+                    <template x-for="product in products.slice(4, 8)" :key="product.id">
+                        <div
+                            class="bg-white border border-[#E2E8F0] shadow-sm rounded-sm overflow-hidden hover:shadow-md transform hover:scale-105 transition-all duration-300 flex flex-col h-full justify-between">
+                            <div class="h-48 w-full bg-neutral-100 flex items-center justify-center">
+                                <img :src="product.thumbnail" alt="Product thumbnail" class="h-full object-contain">
+                            </div>
+                            <div class="p-4">
+                                <h2 class="font-semibold text-md text-gray-800" x-text="product.title"></h2>
+                                <p class="text-gray-600 text-sm mt-1">$<span x-text="product.price"></span></p>
+                            </div>
+                            <div class="p-4">
+                                <button @click="addToCart(product)"
+                                    class="w-full bg-blue-600 text-white py-2 rounded-sm hover:bg-blue-700 transition-all">
+                                    <i class="ph ph-plus text-white text-sm"></i> Add</button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </section>
         </div>
-    </div>
+        <div x-show="currentTab === 'products'">
+            <div class="container mx-auto pb-6 px-6 flex justify-between h-[70px]">
+                <div>
+                    <select x-model="sortByPrice"
+                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <option value="none">Sort by Price</option>
+                        <option value="asc">Price: Low to High</option>
+                        <option value="desc">Price: High to Low</option>
+                    </select>
+                </div>
+                <div x-cloak x-show="search || sortByPrice !== 'none'">
+                    <button @click="clearFilters"
+                        class="py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 px-4">Clear
+                        Filters</button>
+                </div>
+            </div>
+            <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
+                <template x-if="!filteredProducts.length">
+                    <div class="col-span-full text-center mt-12 mx-auto w-[430px]">
+                        <h2 class="text-xl font-bold">No Results Found for "<span x-text="search"></span>"</h2>
+                        <p class="mt-2 text-gray-500">Sorry, we couldn't find any results that match your search query.
+                            Please try refining your search.</p>
+                    </div>
+                </template>
+                <template x-for="product in filteredProducts" :key="product.id">
+                    <div
+                        class="bg-white border border-[#E2E8F0] shadow-sm rounded-sm overflow-hidden hover:shadow-md transform hover:scale-105 transition-all duration-300 flex flex-col h-full justify-between">
+                        <div class="h-64 w-full bg-neutral-100 flex items-center justify-center">
+                            <img :src="product.thumbnail" alt="Product thumbnail" class="h-full object-contain">
+                        </div>
+                        <div class="p-4">
+                            <h2 class="font-semibold text-md text-gray-800" x-text="product.title"></h2>
+                            <p class="text-gray-600 text-sm mt-1">$<span x-text="product.price"></span></p>
+                        </div>
+                        <div class="p-4">
+                            <button @click="addToCart(product)"
+                                class="w-full bg-blue-600 text-white py-2 rounded-sm hover:bg-blue-700 transition-all">
+                                <i class="ph ph-plus text-white text-sm"></i> Add</button>
+                        </div>
+                    </div>
+                </template>
+            </section>
+        </div>
+    </main>
 
     <div x-cloak x-show="cartOpen" class="fixed inset-0 z-50 flex justify-end">
         <div class="bg-black bg-opacity-50 w-full h-full absolute"></div>
         <div @click.outside="closeCart" class="drawer">
+            <h2 class="text-2xl font-bold mb-4">Shopping Cart</h2>
             <button @click="closeCart" class="absolute top-4 right-4 text-gray-600">
                 <i class="ph ph-x text-2xl"></i>
             </button>
-
-            <h2 class="text-2xl font-bold mb-4">Shopping Cart</h2>
-
-            <ul class="overflow-scroll no-scrollbar">
+            <div x-show="cart.length === 0" class="flex flex-col items-center justify-center text-center h-full">
+                <i class="ph ph-shopping-cart text-6xl text-gray-500"></i>
+                <h3 class="text-xl font-bold mt-2">Your cart is empty</h3>
+                <p class="text-gray-500 mt-2">Looks like you haven't added anything to<br />your cart yet.</p>
+                <button @click="currentTab = 'products'; closeCart()"
+                    class="mt-6 bg-blue-600 text-white py-2 px-6 rounded rounded-sm hover:bg-blue-700 transition">
+                    Continue shopping
+                </button>
+            </div>
+            <ul x-cloak x-show="cart.length > 0" class="overflow-scroll no-scrollbar">
                 <template x-for="item in cart" :key="item.id">
                     <li class="cart-item">
-                        <img :src="item.thumbnail" alt="Product image">
+                        <img :src="item.thumbnail" alt="Product thumbnail">
                         <div class="item-info">
                             <h4 x-text="item.title"></h4>
                             <p>Quantity:
@@ -125,18 +182,16 @@
                     </li>
                 </template>
             </ul>
-
-            <div class="total-section">
+            <div x-cloak x-show="cart.length" class="total-section">
                 <p>Total: <span>$<span x-text="cartTotal().toFixed(2)"></span></span></p>
                 <p class="text-gray-500">Shipping and taxes will be added at checkout</p>
-                <button x-cloak x-show="cart.length" @click="clearCart"
+                <button @click="clearCart"
                     class="w-full bg-red-700 text-white mt-2 py-2 rounded-sm hover:bg-red-800 transition-all">
                     <i class="ph ph-trash text-sm"></i> Clear Cart
                 </button>
             </div>
         </div>
     </div>
-
 
 </body>
 

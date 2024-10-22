@@ -5,6 +5,7 @@ document.addEventListener("alpine:init", () => {
     products: [],
     cart: Alpine.$persist([[]]),
     cartOpen: Alpine.$persist(false),
+    currentTab: Alpine.$persist("home"),
 
     // Initialize app and fetch products
     init() {
@@ -18,8 +19,9 @@ document.addEventListener("alpine:init", () => {
       this.products = data.products.map((product) => ({
         id: product.id,
         title: product.title,
-        price: product.price,
+        description: product.description,
         thumbnail: product.thumbnail,
+        price: product.price,
       }));
     },
 
