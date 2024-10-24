@@ -27,7 +27,7 @@ document.addEventListener("alpine:init", () => {
 
     // Filter products by search and sorting
     get filteredProducts() {
-      let result = this.products;
+      let result = [...this.products];
 
       if (this.search) {
         result = result.filter((product) =>
