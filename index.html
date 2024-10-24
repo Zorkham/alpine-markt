@@ -59,7 +59,7 @@
     </header>
 
     <main class="container mx-auto py-6 px-6">
-        <div x-show="currentTab === 'home'">
+        <div x-cloak x-show="currentTab === 'home'">
             <section class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <div class="col-span-2">
                     <div
@@ -103,7 +103,7 @@
                 </div>
             </section>
         </div>
-        <div x-show="currentTab === 'products'">
+        <div x-cloak x-show="currentTab === 'products'">
             <div class="container mx-auto pb-6 px-6 flex justify-between h-[70px]">
                 <div>
                     <select x-model="sortByPrice"
@@ -150,12 +150,16 @@
 
     <div x-cloak x-show="cartOpen" class="fixed inset-0 z-50 flex justify-end">
         <div class="bg-black bg-opacity-50 w-full h-full absolute"></div>
-        <div @click.outside="closeCart" class="drawer">
+        <div x-cloak x-show="cartOpen" @click.outside="closeCart"
+            x-transition:enter="transform transition ease-out duration-300" x-transition:enter-start="translate-x-full"
+            x-transition:enter-end="translate-x-0" x-transition:leave="transform transition ease-in duration-300"
+            x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" class="drawer">
             <h2 class="text-2xl font-bold mb-4">Shopping Cart</h2>
             <button @click="closeCart" class="absolute top-4 right-4 text-gray-600">
                 <i class="ph ph-x text-2xl"></i>
             </button>
-            <div x-show="cart.length === 0" class="flex flex-col items-center justify-center text-center h-full">
+            <div x-cloak x-show="cart.length === 0"
+                class="flex flex-col items-center justify-center text-center h-full">
                 <i class="ph ph-shopping-cart text-6xl text-gray-500"></i>
                 <h3 class="text-xl font-bold mt-2">Your cart is empty</h3>
                 <p class="text-gray-500 mt-2">Looks like you haven't added anything to<br />your cart yet.</p>
