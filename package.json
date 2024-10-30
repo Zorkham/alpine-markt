@@ -1,5 +1,5 @@
 {
-  "name": "alpine-markt-2",
+  "name": "alpine-markt",
   "version": "1.0.0",
   "description": "An Alpine.js Markt application",
   "main": "src/main.js",
