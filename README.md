@@ -4,7 +4,8 @@ Alpine Markt is a simple e-commerce website that allows users to add products to
 
 **Demo: [alpine-markt.vercel.app](https://alpine-markt.vercel.app)**
 
-![Preview](./public/preview.png)
+[![Preview](./public/preview.png)](https://alpine-markt.vercel.app)
+
 
 ## Features
 
