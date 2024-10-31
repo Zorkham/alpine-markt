@@ -37,6 +37,10 @@ Alpine Markt is a simple e-commerce website that allows users to add products to
 - **Framework**: [Alpine.js](https://alpinejs.dev)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com)
 - **API**: [DummyJSON](https://dummyjson.com)
+- **Linting**: [ESLint](https://eslint.org)
+- **Formatting**: [Prettier](https://prettier.io)
+- **Testing**: [Jest](https://jestjs.io), [Cypress](https://www.cypress.io), [Cucumber](https://cucumber.io)
+- **Package Manager**: [PNPM](https://pnpm.io)
 - **Build Tool**: [Vite](https://vite.dev)
 - **Deployment**: [Vercel](https://vercel.com)
 
@@ -46,23 +50,45 @@ To get started with this project, follow these steps:
 
 1. **Clone the repository**:
 
-   ```sh
-   git clone https://github.com/zorkham/alpine-markt.git
-   ```
+  ```sh
+  git clone https://github.com/zorkham/alpine-markt.git
+  ```
 
 2. **Install dependencies**:
 
-   ```sh
-   pnpm install
-   ```
+  ```sh
+  pnpm install
+  ```
 
 3. **Run project locally**:
 
-   ```sh
-   pnpm dev
-   ```
+  ```sh
+  pnpm dev
+  ```
 
 4. **Open your browser**: Go to `http://localhost:3000` to see the app in action.
+
+## Testing
+
+This project uses Jest, Cypress, and Cucumber for testing. To run the tests, use the following commands:
+
+- **Unit Tests**:
+
+  ```sh
+  pnpm test
+  ```
+
+- **E2E Tests**:
+
+  ```sh
+  pnpm test:e2e
+  ```
+
+- **All Tests**:
+
+  ```sh
+  pnpm test:all
+  ```
 
 ## Other Projects
 
