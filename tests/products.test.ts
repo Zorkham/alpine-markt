@@ -1,7 +1,6 @@
 import Alpine from 'alpinejs'
 import { fetchProductsApi } from '../src/utils/api'
 import { products } from './../src/components/products'
-import { Product } from '../src/config/product'
 
 // Mock Alpine.$persist
 Alpine.$persist = (value: any) => value
@@ -9,6 +8,12 @@ Alpine.$persist = (value: any) => value
 // Mock the API function
 jest.mock('../src/utils/api', () => ({
   fetchProductsApi: jest.fn()
+}))
+
+jest.mock('alpinejs', () => ({
+  store: jest.fn().mockReturnValue({
+    setNotification: jest.fn()
+  })
 }))
 
 describe('products', () => {
@@ -105,7 +110,7 @@ describe('products', () => {
     expect(sortedProducts).toEqual([
       mockProducts.products[1],
       mockProducts.products[0]
-    ]) // Product B should come first
+    ])
   })
 
   it('should sort products by price in descending order', async () => {
@@ -137,7 +142,7 @@ describe('products', () => {
     expect(sortedProducts).toEqual([
       mockProducts.products[1],
       mockProducts.products[0]
-    ]) // Product B should come first
+    ])
   })
 
   it('should clear filters', () => {

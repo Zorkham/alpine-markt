@@ -4,6 +4,9 @@ import { navigation } from '../src/components/navigation'
 import { cart } from '../src/components/cart'
 import { products } from '../src/components/products'
 
+// Mock the stores
+jest.mock('../src/stores/notification')
+
 // Mock the components
 jest.mock('../src/components/navigation')
 jest.mock('../src/components/cart')
@@ -13,6 +16,7 @@ describe('Alpine.js initialization', () => {
   beforeAll(() => {
     // Mock the Alpine.js plugin and data methods
     Alpine.plugin = jest.fn()
+    Alpine.store = jest.fn()
     Alpine.data = jest.fn()
     Alpine.start = jest.fn()
   })

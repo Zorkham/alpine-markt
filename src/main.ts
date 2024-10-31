@@ -1,13 +1,17 @@
 import Alpine from 'alpinejs'
 import persist from '@alpinejs/persist'
 import { navigation } from './components/navigation'
-import { cart } from './components/cart'
+import { notification } from './stores/notification'
 import { products } from './components/products'
+import { cart } from './components/cart'
 
 import 'phosphor-icons'
 
 // Register Alpine plugins
 Alpine.plugin(persist)
+
+// Register Alpine stores
+Alpine.store('notification', notification)
 
 // Register Alpine components
 Alpine.data('navigation', navigation)

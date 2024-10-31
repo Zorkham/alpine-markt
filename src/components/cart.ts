@@ -1,5 +1,6 @@
 import Alpine from 'alpinejs'
 import type { Product } from '../config/product'
+import { notification } from '../stores/notification'
 
 export const cart = () => ({
   cart: Alpine.$persist([]) as unknown as Product[],
@@ -13,7 +14,9 @@ export const cart = () => ({
     } else {
       this.cart.push({ ...product, quantity: 1 })
     }
-    this.toggleCart()
+
+    const notificationInstance: any = Alpine.store('notification')
+    notificationInstance.setNotification(product)
   },
 
   // Remove a product from the cart by ID

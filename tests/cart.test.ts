@@ -5,6 +5,12 @@ import { Product } from '../src/config/product'
 // Mock Alpine.$persist
 Alpine.$persist = (value: any) => value
 
+jest.mock('alpinejs', () => ({
+  store: jest.fn().mockReturnValue({
+    setNotification: jest.fn()
+  })
+}))
+
 describe('cart', () => {
   let cartInstance: ReturnType<typeof cart>
 
