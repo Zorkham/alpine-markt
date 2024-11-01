@@ -46,9 +46,9 @@
               </button>
             </div>
             <button @click="toggleCart" class="relative">
-              <i class="cart-button ph ph-shopping-cart text-2xl text-gray-800"></i>
-              <span x-cloak x-show="cart.length > 0"
-                class="cart-badge absolute bottom-5 left-5 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              <i data-cy="cart-button" class="ph ph-shopping-cart text-2xl text-gray-800"></i>
+              <span x-cloak x-show="cart.length > 0" data-cy="cart-badge"
+                class="absolute bottom-5 left-5 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 <span x-text="cartTotalItems"></span>
               </span>
             </button>
@@ -61,8 +61,8 @@
       <div x-cloak x-show="currentTab === 'home'">
         <section class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div class="col-span-2">
-            <div
-              class="product-item bg-white border border-[#E2E8F0] shadow-sm rounded-sm overflow-hidden hover:shadow-md transform hover:scale-[1.02] transition-all duration-300 flex flex-col h-full justify-between">
+            <div data-cy="product-item"
+              class="bg-white border border-[#E2E8F0] shadow-sm rounded-sm overflow-hidden hover:shadow-md transform hover:scale-[1.02] transition-all duration-300 flex flex-col h-full justify-between">
               <div class="h-full bg-neutral-100 flex items-center justify-center">
                 <img class="h-[460px] object-cover" :src="products[1]?.thumbnail"
                   onerror="this.src='default.png';this.onerror='';" alt="Product thumbnail" />
@@ -75,8 +75,8 @@
                 <p class="text-gray-600 mt-1 mb-4" x-text="products[1]?.description"></p>
               </div>
               <div class="p-4">
-                <button @click="addToCart(products[1])"
-                  class="add-to-cart w-full bg-blue-600 text-white py-2 rounded-sm hover:bg-blue-700 transition-all">
+                <button @click="addToCart(products[1])" data-cy="add-to-cart"
+                  class="w-full bg-blue-600 text-white py-2 rounded-sm hover:bg-blue-700 transition-all">
                   <i class="ph ph-plus text-white text-sm"></i> Add
                 </button>
               </div>
@@ -84,8 +84,8 @@
           </div>
           <div class="col-span-2 grid grid-cols-2 gap-6">
             <template x-for="product in products.slice(4, 8)" :key="product.id">
-              <div
-                class="product-item bg-white border border-[#E2E8F0] shadow-sm rounded-sm overflow-hidden hover:shadow-md transform hover:scale-105 transition-all duration-300 flex flex-col h-full justify-between">
+              <div data-cy="product-item"
+                class="bg-white border border-[#E2E8F0] shadow-sm rounded-sm overflow-hidden hover:shadow-md transform hover:scale-105 transition-all duration-300 flex flex-col h-full justify-between">
                 <div class="h-48 w-full bg-neutral-100 flex items-center justify-center">
                   <img class="h-full object-contain" :src="product.thumbnail"
                     onerror="this.src='default.png';this.onerror='';" alt="Product thumbnail" />
@@ -97,8 +97,8 @@
                   </p>
                 </div>
                 <div class="p-4">
-                  <button @click="addToCart(product)"
-                    class="add-to-cart w-full bg-blue-600 text-white py-2 rounded-sm hover:bg-blue-700 transition-all">
+                  <button @click="addToCart(product)" data-cy="add-to-cart"
+                    class="w-full bg-blue-600 text-white py-2 rounded-sm hover:bg-blue-700 transition-all">
                     <i class="ph ph-plus text-white text-sm"></i> Add
                   </button>
                 </div>
@@ -137,8 +137,8 @@
             </div>
           </template>
           <template x-for="product in filteredProducts" :key="product.id">
-            <div
-              class="product-item bg-white border border-[#E2E8F0] shadow-sm rounded-sm overflow-hidden hover:shadow-md transform hover:scale-105 transition-all duration-300 flex flex-col h-full justify-between">
+            <div data-cy="product-item"
+              class="bg-white border border-[#E2E8F0] shadow-sm rounded-sm overflow-hidden hover:shadow-md transform hover:scale-105 transition-all duration-300 flex flex-col h-full justify-between">
               <div class="h-64 w-full bg-neutral-100 flex items-center justify-center">
                 <img :src="product.thumbnail" alt="Product thumbnail" class="h-full object-contain" />
               </div>
@@ -149,8 +149,8 @@
                 </p>
               </div>
               <div class="p-4">
-                <button @click="addToCart(product)"
-                  class="add-to-cart w-full bg-blue-600 text-white py-2 rounded-sm hover:bg-blue-700 transition-all">
+                <button @click="addToCart(product)" data-cy="add-to-cart"
+                  class="w-full bg-blue-600 text-white py-2 rounded-sm hover:bg-blue-700 transition-all">
                   <i class="ph ph-plus text-white text-sm"></i> Add
                 </button>
               </div>
@@ -160,7 +160,7 @@
       </div>
     </main>
 
-    <div x-cloak x-show="cartOpen" class="cart-drawer fixed inset-0 z-50 flex justify-end">
+    <div x-cloak x-show="cartOpen" data-cy="cart-drawer" class="fixed inset-0 z-50 flex justify-end">
       <div class="bg-black bg-opacity-50 w-full h-full absolute"></div>
       <div x-cloak x-show="cartOpen" @click.outside="closeCart"
         x-transition:enter="transform transition ease-out duration-300" x-transition:enter-start="translate-x-full"
@@ -183,7 +183,7 @@
         </div>
         <ul x-cloak x-show="cart.length > 0" class="overflow-scroll no-scrollbar">
           <template x-for="item in cart" :key="item.id">
-            <li class="cart-item">
+            <li data-cy="cart-item">
               <img :src="item.thumbnail" alt="Product thumbnail" />
               <div class="item-info">
                 <h4 x-text="item.title"></h4>
@@ -191,11 +191,11 @@
                   Quantity:
                   <button @click="item.quantity > 1 ? item.quantity-- : removeFromCart(item.id)"
                     class="text-gray-600 hover:text-gray-800">
-                    <i class="cart-item-minus ph ph-minus text-sm"></i>
+                    <i data-cy="cart-item-minus" class="ph ph-minus text-sm"></i>
                   </button>
                   <span x-text="item.quantity"></span>
                   <button @click="item.quantity++" class="text-gray-600 hover:text-gray-800">
-                    <i class="cart-item-plus ph ph-plus text-sm"></i>
+                    <i data-cy="cart-item-plus" class="ph ph-plus text-sm"></i>
                   </button>
                 </p>
               </div>
@@ -212,8 +212,8 @@
           <p class="text-gray-500">
             Shipping and taxes will be added at checkout.
           </p>
-          <button @click="clearCart"
-            class="cart-clear-button w-full bg-red-700 text-white mt-2 py-2 rounded-sm hover:bg-red-800 transition-all">
+          <button @click="clearCart" data-cy="cart-clear-button"
+            class="w-full bg-red-700 text-white mt-2 py-2 rounded-sm hover:bg-red-800 transition-all">
             <i class="ph ph-trash text-sm"></i> Clear Cart
           </button>
         </div>

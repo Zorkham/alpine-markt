@@ -1,6 +1,5 @@
 import Alpine from 'alpinejs'
 import type { Product } from '../config/product'
-import { notification } from '../stores/notification'
 
 export const cart = () => ({
   cart: Alpine.$persist([]) as unknown as Product[],
