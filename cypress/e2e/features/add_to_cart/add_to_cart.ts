@@ -34,6 +34,16 @@ Then('the cart icon should display {string}', (count: number) => {
 })
 
 When(
+  'I click the "Plus" button for the {string} on the cart drawer',
+  (productTitle: string) => {
+    cy.contains('.cart-item', productTitle)
+      .should('be.visible')
+      .find('.cart-item-plus')
+      .click()
+  }
+)
+
+When(
   'I click the "Minus" button for the {string} on the cart drawer',
   (productTitle: string) => {
     cy.contains('.cart-item', productTitle)
@@ -50,6 +60,10 @@ Then('the cart icon should display {int}', (count: number) => {
 Then('I click the cart button to open the cart drawer', () => {
   cy.get('.cart-button').click()
   cy.get('.drawer').should('be.visible')
+})
+
+Then('I click the "Clear Cart" button on the cart drawer', () => {
+  cy.get('.cart-clear-button').click()
 })
 
 Then('I should see the message "Your cart is empty"', () => {
