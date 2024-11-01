@@ -183,7 +183,7 @@
         </div>
         <ul x-cloak x-show="cart.length > 0" class="overflow-scroll no-scrollbar">
           <template x-for="item in cart" :key="item.id">
-            <li data-cy="cart-item">
+            <li data-cy="cart-item" class="cart-item">
               <img :src="item.thumbnail" alt="Product thumbnail" />
               <div class="item-info">
                 <h4 x-text="item.title"></h4>
