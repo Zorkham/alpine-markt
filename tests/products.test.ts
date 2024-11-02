@@ -154,4 +154,12 @@ describe('products', () => {
     expect(productInstance.search).toBe('')
     expect(productInstance.sortByPrice).toBe('none')
   })
+
+  it('should clear search', () => {
+    productInstance.search = 'Apple'
+
+    productInstance.clearSearch()
+
+    expect(productInstance.search).toBe('')
+  })
 })

@@ -44,6 +44,11 @@ export const products = () => ({
     return filtered
   },
 
+  // Clear search
+  clearSearch() {
+    this.search = ''
+  },
+
   // Clear filters (search and sorting)
   clearFilters() {
     this.search = ''
