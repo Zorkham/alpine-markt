@@ -1,11 +1,11 @@
+import 'phosphor-icons'
+
 import Alpine from 'alpinejs'
-import persist from '@alpinejs/persist'
+import { cart } from './components/cart'
 import { navigation } from './components/navigation'
 import { notification } from './stores/notification'
+import persist from '@alpinejs/persist'
 import { products } from './components/products'
-import { cart } from './components/cart'
-
-import 'phosphor-icons'
 
 // Register Alpine plugins
 Alpine.plugin(persist)

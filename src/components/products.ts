@@ -1,6 +1,6 @@
 import Alpine from 'alpinejs'
-import { fetchProductsApi } from '../utils/api'
 import type { Product } from '../config/product'
+import { fetchProductsApi } from '../utils/api'
 
 export const products = () => ({
   products: [] as Product[],

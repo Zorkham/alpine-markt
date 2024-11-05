@@ -1,6 +1,6 @@
 import Alpine from 'alpinejs'
-import { cart } from '../src/components/cart'
 import { Product } from '../src/config/product'
+import { cart } from '../src/components/cart'
 
 // Mock Alpine.$persist
 Alpine.$persist = (value: any) => value

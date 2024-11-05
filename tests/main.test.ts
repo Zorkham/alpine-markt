@@ -1,7 +1,7 @@
 import Alpine from 'alpinejs'
-import persist from '@alpinejs/persist'
-import { navigation } from '../src/components/navigation'
 import { cart } from '../src/components/cart'
+import { navigation } from '../src/components/navigation'
+import persist from '@alpinejs/persist'
 import { products } from '../src/components/products'
 
 // Mock the stores

@@ -1,5 +1,5 @@
-import { notification } from '../src/stores/notification'
 import { Product } from '../src/config/product'
+import { notification } from '../src/stores/notification'
 
 describe('notification store', () => {
   jest.useFakeTimers()

@@ -6,12 +6,13 @@ Alpine Markt is a simple e-commerce website that allows users to add products to
 
 [![Preview](./public/preview.png)](https://alpine-markt.vercel.app)
 
-
 ## Features
 
 - **API Integration**: The application uses the [DummyJSON API](https://dummyjson.com/) to fetch product data.
 - **Add Products**: Add products to the shopping cart.
 - **Remove Products**: Remove products from the shopping cart.
+- **Search Products**: Search for products by name.
+- **Sort Products**: Sort products by price.
 - **Clear Cart**: Clear the shopping cart and remove all products.
 - **Calculate Total**: Calculate the total price of the products in the shopping cart.
 - **Local Storage**: The shopping cart data is stored in the local storage.
